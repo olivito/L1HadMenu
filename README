@@ -28,3 +28,16 @@ cmsRun runUCTToGTinterface_l1hadmenu_decisions.py
 root -l output.root
 Events->GetEntries("l1_HTT200")
 Events->GetEntries("l1_HTT200 || l1_DoubleJetC120")
+
+## the SUSY menu proposal corresponds to:
+Events->GetEntries("l1_HTT200 || l1_DoubleJetC120 || l1_QuadJetC60 || l1_HTT125DoubleJetC30Dphi8bins || l1_DoubleJetC60MET60")
+
+## for the |eta| < 2.2 proposal, change the following lines in the python config:
+process.UCT2015Producer.minGctEtaForSums = cms.uint32(5)
+process.UCT2015Producer.maxGctEtaForSums = cms.uint32(16)
+doEta22 = cms.bool(True),
+
+## and rerun as above.  The menu proposal corresponds to:
+Events->GetEntries("l1_HTT175 || l1_DoubleJetC120 || l1_QuadJetC60 || l1_HTT95DoubleJetC30Dphi8bins || l1_DoubleJetC60MET60")
+
+## note that in the |eta| < 2.2 scenario, ALL jets, HT and MET use |eta| < 2.2, with this implementation

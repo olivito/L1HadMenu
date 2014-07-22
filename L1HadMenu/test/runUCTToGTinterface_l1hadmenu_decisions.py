@@ -52,6 +52,7 @@ process.l1hadmenu = cms.EDProducer( 'L1HadMenuDecisionProducer' ,
                               L1JetsFwdInputTag = cms.InputTag("l1extraParticlesUCT","Forward","L1CustomNtupleProc"),
                               L1EtMissInputTag = cms.InputTag("l1extraParticlesUCT","MET","L1CustomNtupleProc"),
                               L1MHTInputTag = cms.InputTag("l1extraParticlesUCT","MHT","L1CustomNtupleProc"),
+                              doEta22 = cms.bool(False),
                               )
 
 process.p1 = cms.Path(

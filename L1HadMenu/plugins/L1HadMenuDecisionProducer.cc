@@ -113,6 +113,7 @@ private:
   edm::InputTag L1EtMissInputTag;
   edm::InputTag L1MHTInputTag;
 
+  bool doEta22_;
 };
 
 //
@@ -133,6 +134,8 @@ L1HadMenuDecisionProducer::L1HadMenuDecisionProducer(const edm::ParameterSet& iC
   L1JetsFwdInputTag = iConfig.getParameter<edm::InputTag>("L1JetsFwdInputTag");
   L1EtMissInputTag = iConfig.getParameter<edm::InputTag>("L1EtMissInputTag");
   L1MHTInputTag= iConfig.getParameter<edm::InputTag>("L1MHTInputTag");
+
+  doEta22_ = iConfig.getParameter<bool>("doEta22");
 
   // output branches
   produces<bool>  (aliasprefix_+"HTT95DoubleJetC30Dphi8bins").setBranchAlias(aliasprefix_+"_HTT95DoubleJetC30Dphi8bins");
@@ -205,8 +208,12 @@ L1HadMenuDecisionProducer::produce(edm::Event& iEvent, const edm::EventSetup& iS
 
   if ( L1JetsCentHandle.isValid() ) {
     for (std::vector<L1JetParticle>::const_iterator jetIter = L1JetsCentHandle -> begin(); jetIter != L1JetsCentHandle->end(); ++jetIter) {
+      float eta = jetIter -> eta();
+
       jets.push_back(jetIter->p4());
-      jetsCent.push_back(jetIter->p4());
+      if (!doEta22_ || (fabs(eta) < 2.172)) {
+        jetsCent.push_back(jetIter->p4());
+      }
 
     } // loop over jets
   }
