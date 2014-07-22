@@ -1,0 +1,23 @@
+This package depends on the UCT2015 emulator (or the bitwise L1 emulator).  To set everything up:
+
+cmsrel CMSSW_7_1_0_pre8
+cd CMSSW_7_1_0_pre8/src
+cmsenv
+
+git cms-init   
+
+# Downloading the UCT 
+git clone https://github.com/uwcms/UCT2015.git L1Trigger/UCT2015
+cd L1Trigger/UCT2015
+git checkout 2014-Menus-V47
+cd ../..
+
+# Download this package
+git clone git@github.com:olivito/L1HadMenu.git
+
+scram b -j 8
+
+#### example of running
+
+cd L1HadMenu/L1HadMenu/test
+cmsRun runUCTToGTinterface_l1hadmenu_decisions.py
