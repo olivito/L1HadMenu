@@ -21,3 +21,10 @@ scram b -j 8
 
 cd L1HadMenu/L1HadMenu/test
 cmsRun runUCTToGTinterface_l1hadmenu_decisions.py
+
+## this outputs basically an ntuple with the trigger decisions.
+## to check the number of events passing various triggers:
+
+root -l output.root
+Events->GetEntries("l1_HTT200")
+Events->GetEntries("l1_HTT200 || l1_DoubleJetC120")
